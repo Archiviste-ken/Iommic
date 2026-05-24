@@ -144,7 +144,7 @@ Prepare your local environment.
    Copy the example environment file.
 
    ```bash
-   cp .env.example .env.local
+   cp .env.example .env
    ```
 
 4. **Start the development server**
@@ -157,7 +157,7 @@ Prepare your local environment.
 
 ## ENVIRONMENT VARIABLES
 
-To run IOMMIC locally, you will need to configure the following secrets in your `.env.local` file:
+To run IOMMIC locally, you will need to configure the following secrets in your `.env` file:
 
 ```env
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=

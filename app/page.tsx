@@ -3,47 +3,49 @@
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  Guitar,
-  Flame,
-  CirclePlay,
-  Sparkles,
   AudioWaveform,
+  Flame,
+  Guitar,
+  Layers,
+  Sparkles,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
-import Image from "next/image";
+
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+};
 
 export default function Home() {
   const { isSignedIn } = useAuth();
 
   return (
-    <div className="min-h-screen bg-[#030303] text-zinc-200 font-sans selection:bg-red-900 selection:text-white">
-      {/* Subtle Grid Background */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+    <div className="min-h-screen bg-[#030303] text-zinc-200">
+      <div className="fixed inset-0 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:26px_26px]" />
+      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,#2b0a0a_0%,transparent_50%)]" />
+      <div className="fixed -top-48 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-red-900/20 blur-[140px]" />
+      <div className="fixed -bottom-56 right-[-10%] h-[520px] w-[520px] rounded-full bg-orange-900/10 blur-[160px]" />
 
-      {/* Glowing Orb Effects */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-red-900/10 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-orange-900/5 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
-
-      {/* Nav */}
-      <nav className="relative z-50 flex items-center justify-between px-8 pt-8 lg:px-16">
+      <header className="relative z-20 flex items-center justify-between px-6 pt-6 lg:px-16">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-2xl font-serif font-bold text-white tracking-[0.2em]"
+          className="text-2xl font-serif font-bold tracking-[0.35em] text-white"
         >
           IOMMIC
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="flex items-center gap-6"
+          className="flex items-center gap-4"
         >
           {isSignedIn ? (
             <Link
               href="/dashboard"
-              className="text-[10px] sm:text-xs uppercase tracking-widest font-medium hover:text-red-500 transition-colors"
+              className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-zinc-400 hover:text-white transition-colors"
             >
               Dashboard
             </Link>
@@ -51,219 +53,210 @@ export default function Home() {
             <>
               <Link
                 href="/auth/sign-in"
-                className="hidden sm:block text-[10px] sm:text-xs uppercase tracking-widest font-medium text-zinc-400 hover:text-white transition-colors"
+                className="hidden sm:block text-[10px] sm:text-xs uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition-colors"
               >
                 Sign In
               </Link>
               <Link
                 href="/auth/sign-up"
-                className="text-[10px] sm:text-xs uppercase tracking-widest font-bold bg-white text-black px-6 py-3 rounded-full hover:bg-zinc-200 transition-transform hover:scale-105"
+                className="text-[10px] sm:text-xs uppercase tracking-[0.35em] font-bold bg-white text-black px-5 py-3 rounded-full hover:bg-zinc-200 transition-transform hover:scale-105"
               >
                 Start Learning
               </Link>
             </>
           )}
         </motion.div>
-      </nav>
+      </header>
 
-      {/* Main Hero */}
-      <main className="relative z-10 px-8 lg:px-16 pt-24 pb-24 max-w-7xl mx-auto min-h-[85vh] flex items-center">
-  <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
-    
-    {/* LEFT CONTENT */}
-    <div className="text-center lg:text-left">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-900/30 bg-red-900/10 text-red-500 text-xs font-mono mb-8"
-      >
-        <Sparkles size={14} />
-        <span>INSPIRED BY THE LEGACY OF SIR TONY IOMMI</span>
-      </motion.div>
+      <main className="relative z-10 mx-auto max-w-7xl px-6 pt-16 lg:px-16">
+        <section className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 min-h-[78vh]">
+          <div className="text-center lg:text-left">
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.7 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-900/30 bg-red-900/10 text-red-400 text-[10px] font-mono uppercase tracking-[0.35em] mb-8"
+            >
+              <Sparkles size={12} />
+              Inspired by the legacy of Tony Iommi
+            </motion.div>
 
-      <motion.h1
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tight text-white uppercase leading-[0.9]"
-      >
-        Learn
-        <br />
-        Guitar
-        <br />
-        With
-        <span className="text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-orange-700">
-          {" "}Legacy.
-        </span>
-      </motion.h1>
+            <motion.h1
+              {...fadeUp}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-5xl sm:text-6xl lg:text-[6.5rem] font-black tracking-tight text-white uppercase leading-[0.9]"
+            >
+              Learn guitar
+              <br />
+              with purpose
+              <br />
+              build a
+              <span className="text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-red-900">
+                legacy
+              </span>
+            </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="mt-8 text-lg text-zinc-400 leading-relaxed max-w-xl"
-      >
-        IOMMIC transforms guitar learning into a progressive journey of riffs,
-        mastery, discipline, and musical identity.
-      </motion.p>
+            <motion.p
+              {...fadeUp}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mt-8 text-lg text-zinc-400 leading-relaxed max-w-xl"
+            >
+              IOMMIC is a dark, premium guitar-learning platform built around
+              discipline and progression. No shortcuts. No noise. Just mastery.
+            </motion.p>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="mt-10 flex flex-col sm:flex-row gap-4"
-      >
-        <Link
-          href={isSignedIn ? "/dashboard" : "/auth/sign-up"}
-          className="flex items-center justify-center gap-3 bg-red-800 text-white px-8 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-sm hover:bg-red-700 transition-all hover:scale-105"
-        >
-          Begin Your Path
-          <ArrowRight size={18} />
-        </Link>
-
-        <button className="border border-white/10 text-zinc-300 px-8 py-5 rounded-full uppercase tracking-[0.2em] text-sm hover:bg-white/5 transition-all">
-          Explore Features
-        </button>
-      </motion.div>
-    </div>
-
-    {/* RIGHT IMAGE */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1 }}
-      className="relative flex justify-center"
-    >
-      {/* Glow */}
-      <div className="absolute inset-0 bg-red-900/20 blur-[120px] rounded-full scale-110" />
-
-      {/* Floating Animation */}
-      <motion.div
-        animate={{ y: [0, -15, 0] }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="relative"
-      >
-        <Image
-          src="/iommi-hero.png"
-          alt="IOMMIC Hero"
-          width={700}
-          height={700}
-          className="relative z-10 object-contain drop-shadow-[0_0_80px_rgba(120,0,0,0.35)]"
-          priority
-        />
-      </motion.div>
-    </motion.div>
-  </div>
-</main>
-
-      {/* Premium Features Bento Grid */}
-      <section className="relative z-10 px-8 lg:px-16 py-24 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="md:col-span-2 bg-[#09090B] border border-white/5 rounded-3xl p-10 lg:p-14 relative overflow-hidden group"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-red-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            <AudioWaveform
-              className="text-red-700 mb-8"
-              size={48}
-              strokeWidth={1.5}
-            />
-            <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">
-              Smart Unlock System
-            </h3>
-            <p className="text-zinc-500 text-lg leading-relaxed max-w-md">
-              Progressively unlock darker, heavier anthems as your technical
-              proficiency grows. The platform adapts to your skill.
-            </p>
-          </motion.div>
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            >
+              <Link
+                href={isSignedIn ? "/dashboard" : "/auth/sign-up"}
+                className="group inline-flex items-center justify-center gap-3 bg-red-800 text-white px-8 py-5 rounded-full font-bold uppercase tracking-[0.3em] text-xs hover:bg-red-700 transition-all shadow-[0_0_50px_-15px_rgba(153,27,27,0.7)]"
+              >
+                Begin Your Path
+                <ArrowRight
+                  size={16}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </Link>
+              <Link
+                href="#modules"
+                className="inline-flex items-center justify-center border border-white/10 text-zinc-300 px-8 py-5 rounded-full uppercase tracking-[0.3em] text-xs hover:bg-white/5 transition-all"
+              >
+                Explore Features
+              </Link>
+            </motion.div>
+          </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="bg-[#09090B] border border-white/5 rounded-3xl p-10 lg:p-14 relative overflow-hidden group flex flex-col justify-between"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9 }}
+            className="relative flex items-center justify-center"
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-orange-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            <Flame
-              className="text-orange-600 mb-8"
-              size={48}
-              strokeWidth={1.5}
-            />
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">
-                Iron Streaks
-              </h3>
-              <p className="text-zinc-500 leading-relaxed">
-                Build unbroken chains of daily practice. Momentum is your
-                heaviest weapon.
-              </p>
+            <div className="absolute h-[520px] w-[520px] rounded-full bg-red-900/20 blur-[140px]" />
+            <div className="relative w-full max-w-[520px] aspect-square rounded-[36px] border border-white/10 bg-black/60 backdrop-blur-xl shadow-[0_60px_160px_-80px_rgba(255,0,0,0.7)]">
+              <div className="absolute inset-0 rounded-[36px] bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.06),transparent)] opacity-80" />
+              <Image
+                src="/Iommi-hero.png"
+                alt="IOMMIC Guitar"
+                fill
+                priority
+                className="object-contain p-8 drop-shadow-[0_0_120px_rgba(180,0,0,0.5)]"
+              />
+              <div className="absolute inset-0 rounded-[36px] border border-white/5" />
             </div>
           </motion.div>
+        </section>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="bg-[#09090B] border border-white/5 rounded-3xl p-10 lg:p-14 relative overflow-hidden group flex flex-col justify-between"
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-red-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            <CirclePlay
-              className="text-red-700 mb-8"
-              size={48}
-              strokeWidth={1.5}
-            />
+        <section id="modules" className="py-20">
+          <div className="flex items-center justify-between gap-6 mb-10 flex-wrap">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">
-                Mastery
-              </h3>
-              <p className="text-zinc-500 leading-relaxed">
-                Iron out the dissonance. Master the spaces between the notes in
-                complete darkness.
+              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                Studio modules
+              </h2>
+              <p className="text-zinc-500 mt-2 max-w-xl">
+                A focused set of tools that turn practice into progress.
               </p>
             </div>
-          </motion.div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-zinc-500">
+              90s modern / cinematic
+            </div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="md:col-span-2 bg-[#09090B] border border-white/5 rounded-3xl p-10 lg:p-14 relative overflow-hidden group"
-          >
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            <Guitar
-              className="text-zinc-400 mb-8"
-              size={48}
-              strokeWidth={1.5}
-            />
-            <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">
-              Deep Analytics
-            </h3>
-            <p className="text-zinc-500 text-lg leading-relaxed max-w-md">
-              Granular analytics on chord resonance, sustain, and accuracy.
-              Visualize your relentless dedication.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: <AudioWaveform size={36} strokeWidth={1.4} />,
+                title: "Smart Unlock",
+                desc: "Progress-based song releases that reward real technique.",
+              },
+              {
+                icon: <Flame size={36} strokeWidth={1.4} />,
+                title: "Streak Engine",
+                desc: "Build daily chains and reinforce discipline.",
+              },
+              {
+                icon: <Guitar size={36} strokeWidth={1.4} />,
+                title: "Chord Mastery",
+                desc: "Transition training that hardens rhythm and timing.",
+              },
+              {
+                icon: <Layers size={36} strokeWidth={1.4} />,
+                title: "Learning Paths",
+                desc: "Personalized programs that adapt to your pace.",
+              },
+              {
+                icon: <Sparkles size={36} strokeWidth={1.4} />,
+                title: "Riff Discovery",
+                desc: "Curated riffs that match your evolving ability.",
+              },
+            ].map((card, index) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#0b0b0f] p-8"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-red-900/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-700" />
+                <div className="relative z-10 text-red-500 mb-6">
+                  {card.icon}
+                </div>
+                <h3 className="relative z-10 text-xl font-semibold text-white">
+                  {card.title}
+                </h3>
+                <p className="relative z-10 mt-3 text-sm text-zinc-500">
+                  {card.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/5 mt-12 py-16 px-8 lg:px-16 text-center flex flex-col items-center">
-        <div className="text-2xl font-serif font-bold text-white tracking-[0.2em] mb-4">
+        <section className="py-20">
+          <div className="grid gap-10 lg:grid-cols-3">
+            {[
+              {
+                step: "01",
+                title: "Foundation",
+                text: "Chords and rhythm built on repeatable drills.",
+              },
+              {
+                step: "02",
+                title: "Mastery",
+                text: "Transitions refined through strict timing practice.",
+              },
+              {
+                step: "03",
+                title: "Legacy",
+                text: "Unlock songs, track streaks, and grow into heavier sets.",
+              },
+            ].map((item) => (
+              <div
+                key={item.step}
+                className="rounded-3xl border border-white/10 bg-black/50 p-8"
+              >
+                <div className="text-red-500 text-xs font-mono uppercase tracking-[0.4em]">
+                  {item.step}
+                </div>
+                <h3 className="mt-4 text-2xl font-semibold text-white">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm text-zinc-500">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <footer className="relative z-10 mt-8 border-t border-white/5 py-14 text-center">
+        <div className="text-2xl font-serif font-bold tracking-[0.35em] text-white">
           IOMMIC
         </div>
-        <p className="text-zinc-600 text-xs font-mono uppercase tracking-[0.2em]">
-          Tone. Weight. Legacy.
+        <p className="mt-2 text-[10px] uppercase tracking-[0.35em] text-zinc-500">
+          TONE. WEIGHT. PROGRESSION.
         </p>
       </footer>
     </div>

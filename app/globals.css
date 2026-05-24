@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #030303;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -12,15 +12,57 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: #030303;
 }
 
 body {
-  background: var(--background);
+  background: #030303;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+.cl-card,
+.cl-rootBox,
+.cl-cardBox,
+.cl-headerTitle,
+.cl-headerSubtitle,
+.cl-formFieldLabel,
+.cl-footerActionText,
+.cl-dividerText {
+  color: white !important;
+}
+
+.cl-headerSubtitle,
+.cl-footerActionText,
+.cl-dividerText {
+  color: #a1a1aa !important;
+}
+
+.cl-formFieldInput {
+  background: rgba(0, 0, 0, 0.4) !important;
+  color: white !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.cl-formFieldInput::placeholder {
+  color: #71717a !important;
+}
+
+.cl-socialButtonsBlockButton {
+  background: rgba(0,0,0,0.35) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  color: white !important;
+}
+
+.cl-formButtonPrimary {
+  background: linear-gradient(
+    to right,
+    #7f1d1d,
+    #dc2626,
+    #7f1d1d
+  ) !important;
+
+  color: white !important;
 }

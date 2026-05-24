@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
+import Image from "next/image";
 
 export default function Home() {
   const { isSignedIn } = useAuth();
@@ -66,58 +67,99 @@ export default function Home() {
       </nav>
 
       {/* Main Hero */}
-      <main className="relative z-10 px-8 lg:px-16 pt-32 pb-24 max-w-7xl mx-auto flex flex-col items-center text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-900/30 bg-red-900/10 text-red-500 text-xs font-mono mb-8"
-        >
-          <Sparkles size={14} />
-          <span>THE NEW ERA OF GUITAR MASTERY</span>
-        </motion.div>
+      <main className="relative z-10 px-8 lg:px-16 pt-24 pb-24 max-w-7xl mx-auto min-h-[85vh] flex items-center">
+  <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
+    
+    {/* LEFT CONTENT */}
+    <div className="text-center lg:text-left">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-900/30 bg-red-900/10 text-red-500 text-xs font-mono mb-8"
+      >
+        <Sparkles size={14} />
+        <span>INSPIRED BY THE LEGACY OF SIR TONY IOMMI</span>
+      </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-6xl md:text-7xl lg:text-[9rem] font-black tracking-tighter text-white uppercase leading-[0.85] mb-8"
-        >
-          Tone. Weight.
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-red-900">
-            Progression.
-          </span>
-        </motion.h1>
+      <motion.h1
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tight text-white uppercase leading-[0.9]"
+      >
+        Learn
+        <br />
+        Guitar
+        <br />
+        With
+        <span className="text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-orange-700">
+          {" "}Legacy.
+        </span>
+      </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="mt-6 text-lg md:text-xl text-zinc-400 max-w-2xl font-light leading-relaxed"
-        >
-          An atmospheric guitar-learning ecosystem inspired by the undisputed
-          master of the heavy riff. Learn with purpose, play with soul.
-        </motion.p>
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className="mt-8 text-lg text-zinc-400 leading-relaxed max-w-xl"
+      >
+        IOMMIC transforms guitar learning into a progressive journey of riffs,
+        mastery, discipline, and musical identity.
+      </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-12 flex flex-col sm:flex-row gap-4 w-full justify-center"
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="mt-10 flex flex-col sm:flex-row gap-4"
+      >
+        <Link
+          href={isSignedIn ? "/dashboard" : "/auth/sign-up"}
+          className="flex items-center justify-center gap-3 bg-red-800 text-white px-8 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-sm hover:bg-red-700 transition-all hover:scale-105"
         >
-          <Link
-            href={isSignedIn ? "/dashboard" : "/auth/sign-up"}
-            className="flex items-center justify-center gap-4 bg-red-800 text-white px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-sm hover:bg-red-700 transition flex-1 max-w-[320px] mx-auto sm:mx-0 shadow-[0_0_40px_-10px_rgba(153,27,27,0.5)] hover:shadow-[0_0_60px_-10px_rgba(153,27,27,0.7)] group"
-          >
-            Begin Your Path
-            <ArrowRight
-              size={18}
-              className="group-hover:translate-x-1 transition-transform"
-            />
-          </Link>
-        </motion.div>
-      </main>
+          Begin Your Path
+          <ArrowRight size={18} />
+        </Link>
+
+        <button className="border border-white/10 text-zinc-300 px-8 py-5 rounded-full uppercase tracking-[0.2em] text-sm hover:bg-white/5 transition-all">
+          Explore Features
+        </button>
+      </motion.div>
+    </div>
+
+    {/* RIGHT IMAGE */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1 }}
+      className="relative flex justify-center"
+    >
+      {/* Glow */}
+      <div className="absolute inset-0 bg-red-900/20 blur-[120px] rounded-full scale-110" />
+
+      {/* Floating Animation */}
+      <motion.div
+        animate={{ y: [0, -15, 0] }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="relative"
+      >
+        <Image
+          src="/iommi-hero.png"
+          alt="IOMMIC Hero"
+          width={700}
+          height={700}
+          className="relative z-10 object-contain drop-shadow-[0_0_80px_rgba(120,0,0,0.35)]"
+          priority
+        />
+      </motion.div>
+    </motion.div>
+  </div>
+</main>
 
       {/* Premium Features Bento Grid */}
       <section className="relative z-10 px-8 lg:px-16 py-24 max-w-7xl mx-auto">
